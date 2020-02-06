@@ -18,6 +18,7 @@ import com.caliber.Nolo_Pose;
 import com.caliber.Nolo_Vector3;
 
 //import com.watchdata.usbhostconn.UsbCustomTransfer2;
+import com.mainactivity.usbhost.UsbCustomTransfer2;
 import com.watchdata.usbhostconn.Utils;
 
 import java.util.HashMap;
@@ -126,7 +127,8 @@ public class UsbCustomTransfer2 {
         filter.addAction("android.hardware.usb.action.USB_DEVICE_DETACHED");
         filter.addAction("android.hardware.usb.action.USB_DEVICE_ATTACHED");
         this.mcontext.registerReceiver(this.mUsbReceiver, filter);
-        this.manager = (UsbManager)this.mcontext.getSystemService("usb");
+//        this.manager = (UsbManager)this.mcontext.getSystemService("usb");
+        this.manager = (UsbManager)this.mcontext.getSystemService(Context.USB_SERVICE);
         this.get_device();
     }
 

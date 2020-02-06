@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 24
 
     defaultConfig {
         applicationId "com.watchdata.usbhost"
         minSdkVersion 18
-        targetSdkVersion 26
+        targetSdkVersion 24
         versionCode 1
         versionName "1.0"
 
@@ -29,9 +29,11 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+//    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
+//    implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:appcompat-v7:24.+'
+    implementation 'org.java-websocket:Java-WebSocket:1.4.0'
     //    compile project(':usbhostconn')
     implementation files('libs/usbhost.jar')
 }

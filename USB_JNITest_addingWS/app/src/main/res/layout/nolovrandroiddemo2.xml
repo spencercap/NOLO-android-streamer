@@ -200,5 +200,53 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/info_ws"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="8dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/ws_ip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:gravity="left"
+            android:text="WebSocket IP: 127.0.0.1:8887"
+            android:textColor="#69a7b0"
+            android:textSize="16dp" />
+
+        <Switch
+            android:id="@+id/ws_switch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="Dynamic IP / Local IP"
+            android:gravity="left"
+            android:textColor="#69a7b0"
+            android:textSize="16dp" />
+
+        <Button
+            android:id="@+id/btn_start_ws"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="startWebSocket"
+            android:text="Start WebSocket"
+            android:textColor="#69a7b0"
+            android:textSize="16dp"></Button>
+
+        <Button
+            android:id="@+id/btn_stop_ws"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="stopWebSocket"
+            android:text="Stop WebSocket"
+            android:textColor="#69a7b0"
+            android:textSize="16dp"></Button>
+
+    </LinearLayout>
+
+
 </LinearLayout>
 </ScrollView>

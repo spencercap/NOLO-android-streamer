@@ -12,12 +12,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.TextView;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.caliber.Nolo_ControllerStates;
 import com.caliber.Nolo_Pose;
 import com.caliber.Nolo_Vector3;
-import com.mainactivity.usbhost.UsbCustomTransfer2;
-//import com.watchdata.usbhostconn.UsbCustomTransfer;
+//import com.mainactivity.usbhost.UsbCustomTransfer2;
+import com.watchdata.usbhostconn.UsbCustomTransfer;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -31,15 +33,25 @@ import android.hardware.usb.UsbInterface;
 import android.hardware.usb.UsbManager;
 import android.util.Log;
 import android.widget.Toast;
-import com.caliber.JNITest;
+//import com.caliber.JNITest;
 import com.caliber.Nolo_ControllerStates;
 import com.caliber.Nolo_Pose;
 import com.caliber.Nolo_Vector3;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+// websocket imports
+import com.mainactivity.usbhost.WebsocketServer;
+import java.io.IOException;
+import java.net.InetSocketAddress;
+import android.net.wifi.WifiManager;
+import android.net.wifi.WifiInfo;
+import java.util.Locale;
 
 /**
  * Created by xu.huang.zf on 2017/5/16.
@@ -113,9 +125,29 @@ public class NoloVrAndroidDemo2 extends Activity implements View.OnClickListener
     private TextView tv_R_T_T;
 
 
+    // helpful vars
+    private Activity mActivity;
+    protected Context mApplicationContext;
+
+    // websocket
+    WebsocketServer wsServer;
+    private String wsIP;
+    private int wsPort = 8887;
+    private TextView ws_IP;
+    private Switch wsSwitch;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+//        mApplicationContext = getActivity().getApplicationContext();
+        mApplicationContext = this.getApplicationContext();
+
+//        mActivity = getBaseActivity();
+        mActivity = this;
 
         setContentView(R.layout.nolovrandroiddemo2);
         initView();
@@ -185,6 +217,14 @@ public class NoloVrAndroidDemo2 extends Activity implements View.OnClickListener
             }
         };
 
+        // for setting the IP in UI
+        ws_IP = (TextView) findViewById(R.id.ws_ip);
+
+        // websocket switch for dynamic of local ip
+        wsSwitch = (Switch) findViewById(R.id.ws_switch);
+
+
+
 
 /*        fl_frame = (LinearLayout) findViewById(R.id.fl_frame);
         fl_frame.setOnClickListener(this);*/
@@ -225,6 +265,8 @@ public class NoloVrAndroidDemo2 extends Activity implements View.OnClickListener
             final Nolo_ControllerStates mnolo_controllerStates_Left = usbCustomTransfer2.getControllerStatesByDeviceType(1);
 //            final Nolo_ControllerStates mnolo_controllerStates_Right = usbCustomTransfer.getControllerStatesByDeviceType(2);
             final Nolo_ControllerStates mnolo_controllerStates_Right = usbCustomTransfer2.getControllerStatesByDeviceType(2);
+
+
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
@@ -308,6 +350,63 @@ public class NoloVrAndroidDemo2 extends Activity implements View.OnClickListener
             });
 
 
+
+            // *** websocket broadcasting *** //
+            if (mnolo_pose_Hmd != null) {
+                String posx = String.valueOf(mnolo_pose_Hmd.getPos().getX());
+                String posy = String.valueOf(mnolo_pose_Hmd.getPos().getY());
+                String posz = String.valueOf(mnolo_pose_Hmd.getPos().getZ());
+                String quaternionx = String.valueOf(mnolo_pose_Hmd.getNolo_Quaternion().getX());
+                String quaterniony = String.valueOf(mnolo_pose_Hmd.getNolo_Quaternion().getY());
+                String quaternionz = String.valueOf(mnolo_pose_Hmd.getNolo_Quaternion().getZ());
+                String quaternionw = String.valueOf(mnolo_pose_Hmd.getNolo_Quaternion().getW());
+
+                wsServer.broadcast( "NOLO POSE HMD " + posx + " " + posy + " " + posz + " " + quaternionx + " " + quaterniony + " " + quaternionz + " " + quaternionw);
+            }
+            if (mnolo_pose_Left != null) {
+                String posx = String.valueOf(mnolo_pose_Left.getPos().getX());
+                String posy = String.valueOf(mnolo_pose_Left.getPos().getY());
+                String posz = String.valueOf(mnolo_pose_Left.getPos().getZ());
+                String quaternionx = String.valueOf(mnolo_pose_Left.getNolo_Quaternion().getX());
+                String quaterniony = String.valueOf(mnolo_pose_Left.getNolo_Quaternion().getY());
+                String quaternionz = String.valueOf(mnolo_pose_Left.getNolo_Quaternion().getZ());
+                String quaternionw = String.valueOf(mnolo_pose_Left.getNolo_Quaternion().getW());
+
+                wsServer.broadcast( "NOLO POSE CONTROLLER_LEFT " + posx + " " + posy + " " + posz + " " + quaternionx + " " + quaterniony + " " + quaternionz + " " + quaternionw);
+            }
+            if (mnolo_pose_Right != null) {
+                String posx = String.valueOf(mnolo_pose_Right.getPos().getX());
+                String posy = String.valueOf(mnolo_pose_Right.getPos().getY());
+                String posz = String.valueOf(mnolo_pose_Right.getPos().getZ());
+                String quaternionx = String.valueOf(mnolo_pose_Right.getNolo_Quaternion().getX());
+                String quaterniony = String.valueOf(mnolo_pose_Right.getNolo_Quaternion().getY());
+                String quaternionz = String.valueOf(mnolo_pose_Right.getNolo_Quaternion().getZ());
+                String quaternionw = String.valueOf(mnolo_pose_Right.getNolo_Quaternion().getW());
+
+                wsServer.broadcast( "NOLO POSE CONTROLLER_RIGHT " + posx + " " + posy + " " + posz + " " + quaternionx + " " + quaterniony + " " + quaternionz + " " + quaternionw);
+            }
+            if (mnolo_controllerStates_Left != null) {
+                String buttons = String.valueOf(mnolo_controllerStates_Left.getButtons());
+                String touches = String.valueOf(mnolo_controllerStates_Left.getTouches());
+                String touchpadaxisX = String.valueOf(mnolo_controllerStates_Left.getTouchpadAxis().getX());
+                String touchpadaxisY = String.valueOf(mnolo_controllerStates_Left.getTouchpadAxis().getY());
+                String energy = String.valueOf(left_EN);
+
+                wsServer.broadcast( "NOLO STATE CONTROLLER_LEFT " + buttons + " " + touches + " " + touchpadaxisX + " " + touchpadaxisY + " " + energy);
+            }
+            if (mnolo_controllerStates_Right != null) {
+                String buttons = String.valueOf(mnolo_controllerStates_Right.getButtons());
+                String touches = String.valueOf(mnolo_controllerStates_Right.getTouches());
+                String touchpadaxisX = String.valueOf(mnolo_controllerStates_Right.getTouchpadAxis().getX());
+                String touchpadaxisY = String.valueOf(mnolo_controllerStates_Right.getTouchpadAxis().getY());
+                String energy = String.valueOf(right_EN);
+
+                wsServer.broadcast( "NOLO STATE CONTROLLER_RIGHT " + buttons + " " + touches + " " + touchpadaxisX + " " + touchpadaxisY + " " + energy);
+            }
+
+
+
+
         }
     };
 
@@ -317,12 +416,10 @@ public class NoloVrAndroidDemo2 extends Activity implements View.OnClickListener
             case R.id.bt_init:
 //                usbCustomTransfer.usb_init();
                     usbCustomTransfer2.usb_init();
-//                usb_init2();
                 break;
             case R.id.bt_conn:
 //                int res = usbCustomTransfer.usb_conn();
                 int res = usbCustomTransfer2.usb_conn();
-//                int res = usb_conn2();
 
                 if (res == 1) {
                     tv_conn.setText("Connect Success");
@@ -413,148 +510,71 @@ public class NoloVrAndroidDemo2 extends Activity implements View.OnClickListener
         }
     }
 
-//    private Context mcontext;
-//    private volatile UsbDeviceConnection connection = null;
-//    private UsbInterface musbInterace;
-////    private UsbCustomTransfer.DisconnectedCallback mDisconnectedCallback;
-//    UsbManager manager;
-//    private UsbDevice device = null;
-//    private PendingIntent pi;
+
+
+
+    // websocket functions
+    public void startWebSocket(View view)
+    {
+        System.out.println("starting websocket server...");
+        System.out.println("the port is: "+ wsPort);
+
+        Boolean wsSwitchState = wsSwitch.isChecked();
+        if ( wsSwitchState ) {
+            // local
+            wsIP = "127.0.0.1";
+        }
+        else {
+            // dynamic
+            wsIP = getLocalIPAddress();
+        }
+
+        System.out.println("the ip is: "+ wsIP);
+
+        // set the IP + port in the ui too
+        ws_IP.setText("WebSocket IP: " + wsIP + ":" + wsPort);
+
+
+//        Context context = getActivity().getApplicationContext();
+        Context context = this.getApplicationContext();
 //
+//        // websocket server
+        InetSocketAddress inetSockAddress = new InetSocketAddress(wsIP, wsPort);
+//        InetSocketAddress inetSockAddress = new InetSocketAddress("127.0.0.1", wsPort);
+        wsServer = new WebsocketServer(inetSockAddress, context, mActivity);
+        wsServer.start();
+    }
+
+    public void stopWebSocket(View view)
+    {
+        wsServer.broadcast( "stop pressed");
+
+        // TODO stopping web socket doesnt work... or rather starting another on a diff port doesnt work..
+//        System.out.println("stopping websocket server...");
 //
-////    private int myvid2 = 10473;
-////    private int mypid2 = 650;
-//
-//    private int myvid2 = 1155;
-//    private int mypid2 = 22352;
-//
-//
-//
-//
-//    private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
-//        public void onReceive(Context context, Intent intent) {
-//            String action = intent.getAction();
-//            System.out.println("trying to do the mUsbRec...");
-////            Log.i("UsbCustomTransfer", "接收到广播的动作类型：" + action);
-//            if (action.equalsIgnoreCase("android.hardware.usb.action.USB_DEVICE_DETACHED")) {
-//                if (connection != null) {
-//                    connection.releaseInterface(musbInterace);
-//                    connection.close();
-//                    connection = null;
-//                    if ( mDisconnectedCallback != null) {
-//                        mDisconnectedCallback.setUsbDeviceConnState(2);
-//                    }
-//                }
-//            } else if (action.equalsIgnoreCase("android.hardware.usb.action.USB_DEVICE_ATTACHED")) {
-////                UsbCustomTransfer.this.get_device();
-//                get_device2();
-//                if (mDisconnectedCallback != null) {
-//                    mDisconnectedCallback.setUsbDeviceConnState(1);
-//                }
-//            }
-//
+//        try {
+//            wsServer.stop();
+//            System.out.println("websocket server stopped");
 //        }
-//    };
-//
-//    private void get_device2() {
-//        HashMap<String, UsbDevice> deviceList = this.manager.getDeviceList();
-//        Iterator deviceIterator = deviceList.values().iterator();
-//
-//        System.out.println(deviceList);
-//        System.out.println(deviceIterator);
-//
-////        Toast.makeText(this, "testing", Toast.LENGTH_SHORT).show();
-////        Toast.makeText(this, " " + deviceList, Toast.LENGTH_SHORT).show();
-//
-//
-//
-//
-//        while(deviceIterator.hasNext()) {
-//            this.device = (UsbDevice)deviceIterator.next();
-//            System.out.println("that yung device info: ");
-//            System.out.println("vid: " + this.device.getVendorId() + "\t pid: " + this.device.getProductId());
-////            Log.i(TAG, "vid: " + this.device.getVendorId() + "\t pid: " + this.device.getProductId());
-//
-//            // temp disable
-////            if (this.device.getVendorId() == this.myvid2 && this.device.getProductId() == this.mypid2) {
-//////                break;
-//////            }
-//
-////            Toast.makeText(this, "test 2", Toast.LENGTH_SHORT).show();
-////            Toast.makeText(this, " " + this.device.getProductId(), Toast.LENGTH_SHORT).show();
-//
+//        catch (IOException e) {
+//            System.out.println(e);
 //        }
-//
-//        if (this.device != null && this.device.getVendorId() == this.myvid2 && this.device.getProductId() == this.mypid2) {
-//
-////            Toast.makeText(this, "in the IF loop", Toast.LENGTH_SHORT).show();
-//            //            Log.i(TAG, "连凌宇智控手柄设备插入手机");
-////            Toast.makeText(this.mcontext, "连凌宇智控手柄设备", 0).show();
-//
-//
-////            this.pi = PendingIntent.getBroadcast(this.mcontext, 0, new Intent("com.android.example.USB_PERMISSION"), 0);
-//            this.pi = PendingIntent.getBroadcast( getApplicationContext(), 0, new Intent("com.android.example.USB_PERMISSION"), 0);
-//
-//            if (this.manager.hasPermission(this.device)) {
-//                System.out.println("yes we have permission");
-//                Toast.makeText(this, "yes have permission", Toast.LENGTH_SHORT).show();
-//
-//                this.manager.requestPermission(this.device, this.pi);
-////                Log.i(TAG, "获取了访问权限");
-////                Toast.makeText(this.mcontext, "获取了访问权限", 0).show();
-//            } else {
-//                Toast.makeText(this, "getting permissions", Toast.LENGTH_SHORT).show();
-//
-//                this.manager.requestPermission(this.device, this.pi);
-//            }
-//
-////            if (this.mconnectedthread != null) {
-////                this.mconnectedthread = null;
-////            }
-//
-//        } else if (this.device == null) {
-//            System.out.println("no device access");
-////            Log.i(TAG, "没有设备接入");
-////            Toast.makeText(this.mcontext, "请插入设备", 0).show();
-//        } else {
-//            System.out.println("not proper device");
-////            Log.i(TAG, "插入手机的不是凌宇智控设备");
-////            Toast.makeText(this.mcontext, "请插入凌宇智控设备", 0).show();
+//        catch (InterruptedException e) {
+//            System.out.println(e);
 //        }
-//    }
-//
-//    public void usb_init2() {
-//        IntentFilter filter = new IntentFilter();
-//        filter.addAction("android.hardware.usb.action.USB_DEVICE_DETACHED");
-//        filter.addAction("android.hardware.usb.action.USB_DEVICE_ATTACHED");
-////        this.mcontext.registerReceiver(this.mUsbReceiver, filter);
-//        this.registerReceiver(this.mUsbReceiver, filter);
-//
-//        this.manager = (UsbManager)this.getSystemService("usb");
-////        manager = (UsbManager)this.mcontext.getSystemService(Context.USB_SERVICE);
-////        this.manager = (UsbManager)this.getSystemService(Context.USB_SERVICE);
-//
-////        this.get_device();
-//        get_device2();
-//    }
-//
-//    public int usb_conn2() {
-//        if (this.pi != null) {
-//            if (this.manager.hasPermission(this.device)) {
-////                Log.i(TAG, "获取了访问权限");
-//                Toast.makeText(this, "gain access but gonna hit a big thing", Toast.LENGTH_SHORT).show();
-//
-////                this.mconnectedthread = new UsbCustomTransfer.ConnectedThread();
-////                this.mconnectedthread.start();
-//                return 1;
-//            } else {
-//                Toast.makeText(this, "Cannot connect to the device without gaining access", Toast.LENGTH_SHORT).show();
-//                return 0;
-//            }
-//        } else {
-//            Toast.makeText(this, "Please apply to the system for USB access first.", Toast.LENGTH_SHORT).show();
-//            return 0;
-//        }
-//    }
+    }
+
+    public String getLocalIPAddress() {
+        // get the current IP address (to start server with)
+//        WifiManager wifiManager = (WifiManager) getActivity().getApplicationContext().getSystemService(mApplicationContext.WIFI_SERVICE);
+        WifiManager wifiManager = (WifiManager) this.getApplicationContext().getSystemService(mApplicationContext.WIFI_SERVICE);
+        WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+        int IPbits = wifiInfo.getIpAddress();
+        String thisIP = String.format(Locale.getDefault(), "%d.%d.%d.%d",
+                (IPbits & 0xff), (IPbits >> 8 & 0xff),
+                (IPbits >> 16 & 0xff), (IPbits >> 24 & 0xff));
+
+        return thisIP;
+    }
 
 }
