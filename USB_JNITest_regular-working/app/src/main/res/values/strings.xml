@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">usbhost</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="local_service_state">USB 接口状态</string>
+    <string name="local_service_started">USB 外设接入</string>
+    <string name="local_service_stopped">USB 外设离开</string>
+</resources>

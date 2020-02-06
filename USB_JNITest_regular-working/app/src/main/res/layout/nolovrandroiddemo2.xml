@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+<LinearLayout
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_api"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="60px"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"
+        android:text="Test The NoloVrAndroid API"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_init"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="usb_init"/>
+
+        <TextView
+            android:id="@+id/tv_init"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="result"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_conn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="usb_conn"/>
+
+        <TextView
+            android:id="@+id/tv_conn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="result"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_setDisconnectedCallback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SetNoloDeviceConnCallback"/>
+
+        <TextView
+            android:id="@+id/tv_setDisconnectedCallback"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint=" Connected?"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:id = "@+id/fl_frame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp">
+
+        <Button
+            android:id = "@+id/bt_startShowData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text = "StartShowData"/>
+        <HorizontalScrollView
+            android:id = "@+id/sl_frame"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            android:isScrollContainer="true">
+
+         </HorizontalScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bt_leftSendData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100LeftShake"
+            />
+
+        <Button
+            android:id="@+id/bt_rightSendData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="100RightShake"
+            />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_getVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="GetVersion"/>
+
+            <TextView
+                android:id="@+id/tv_getVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="result"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_getHmdInitPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HmdInitPosition"
+                />
+
+            <TextView
+                android:id="@+id/tv_getHmdInitPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="result"/>
+        </LinearLayout>
+
+<!--        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_getHmdCalibration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HmdHmdCalibration"/>
+
+            <TextView
+                android:id="@+id/tv_getHmdCalibration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="result"/>
+        </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/bt_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="usb_finish"
+                />
+
+            <TextView
+                android:id="@+id/tv_finish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="result"
+                android:visibility="gone"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>

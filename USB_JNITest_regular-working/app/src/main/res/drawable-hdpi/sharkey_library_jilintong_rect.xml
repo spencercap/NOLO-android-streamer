@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+        <!--
+ 75        size 大小
+ 76        android:width 整型 宽度
+ 77        android:height 整型 高度
+ 78
+ 79     -->
+    <!--<size android:width="648dp"
+          android:height="140dp"/>
+         -->
+    <!-- 填充的颜色 -->
+    <solid android:color="#ffffff" />
+
+    <corners
+        android:bottomLeftRadius="4dp"
+        android:bottomRightRadius="4dp"
+        android:topLeftRadius="4dp"
+        android:topRightRadius="4dp" />
+
+    89     <!--
+ 90          描边
+ 91          android:width 整型 描边的宽度
+ 92          android:color 颜色值 描边的颜色
+ 93          android:dashWidth 整型 表示描边的样式是虚线的宽度， 值为0时，表示为实线。值大于0则为虚线。
+ 94          android:dashGap      整型 表示描边为虚线时，虚线之间的间隔 即“ - - - - ”
+ 96     -->
+         <stroke
+             android:width="2dp"
+             android:color="#dcdcdc"/>
+
+   <!-- <padding android:bottom="22dp"
+             android:left="10dp"
+             android:right="10dp"
+             android:top="22dp" />
+    -->
+
+</shape>
+

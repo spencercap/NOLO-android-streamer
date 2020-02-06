@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffd700">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="#000000"
+            android:gravity="center"
+            android:text="Nolo 设备数据显示"
+            android:textColor="#ffffff"
+            android:textSize="36px" />
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="名称"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="X"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="Y"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="Z/Bt"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="W"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="Hmd:Pos"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_H_P_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_H_P_Y"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_H_P_Z"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="Hmd:Rot"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_H_R_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_H_R_Y"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_H_R_Z"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_H_R_W"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="LeftCON:Pos"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_P_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_P_Y"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_P_Z"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="LeftCON:Rot"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_R_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_R_Y"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_R_Z"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_R_W"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="LeftCON:CONST"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_T_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_T_Y"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_T_Bt"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_T_T"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="LeftCON:EN"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_L_E_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="RightCON:Pos"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_P_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_P_Y"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_P_Z"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="RightCON:Rot"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_R_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_R_Y"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_R_Z"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_R_W"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="RightCON:CONST"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_T_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_T_Y"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_T_Bt"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_T_T"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+
+        <TableRow>
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="RightCON:EN"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:id = "@+id/tv_R_E_X"
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="0.0"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_margin="4dp"
+                android:background="#000000"
+                android:gravity="center"
+                android:text="xx"
+                android:textColor="#ffffff" />
+
+        </TableRow>
+    </TableLayout>
+</LinearLayout>
